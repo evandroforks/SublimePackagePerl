@@ -26,7 +26,7 @@ contexts:
     - include: declarations
     - include: expressions
 
-### [ PROTOTYPES ] ###########################################################
+###[ PROTOTYPES ]#############################################################
 
   immediately-pop:
     - match: ''
@@ -44,7 +44,7 @@ contexts:
     - match: (?=;)
       pop: true
 
-### [ COMMENTS ] #############################################################
+###[ COMMENTS ]###############################################################
 
   comment-line:
     - match: \#+
@@ -206,7 +206,7 @@ contexts:
     - include: comment-pod-formatting
     - include: literal-ltgt-nested
 
-### [ DECLARATIONS ]##########################################################
+###[ DECLARATIONS ]###########################################################
 
   declarations:
     # KEYWORD package
@@ -263,15 +263,16 @@ contexts:
           |warnings|warnings\s*::\s*register){{break}}
       scope: storage.modifier.perl
 
-### [ EXPRESSIONS ]###########################################################
+###[ EXPRESSIONS ]############################################################
 
   expressions:
     - include: blocks
     - include: groups
+    - include: quoted-like
+    - include: label
     - include: constants
     - include: class
     - include: operators
-    - include: quoted-like
     - include: control
     - include: sub
     - include: variables
@@ -281,7 +282,7 @@ contexts:
     - match: ^ *(?=/.*[^\\]/)
       push: regexp-pop
 
-### [ BLOCKS AND GROUPS ]#####################################################
+###[ BLOCKS AND GROUPS ]######################################################
 
   blocks:
     # can't push into scope due to HEREDOCs!
@@ -321,7 +322,7 @@ contexts:
       pop: true
     - include: expressions
 
-### [ CONSTANTS ]#############################################################
+###[ CONSTANTS ]##############################################################
 
   constants:
     - include: constants-numbers
@@ -379,7 +380,7 @@ contexts:
     - match: \b[A-Z0-9_]+{{break}}
       scope: constant.other.perl
 
-### [ STRINGS ]###############################################################
+###[ STRINGS ]################################################################
 
   string:
     - include: string-quoted-backtick
@@ -586,7 +587,7 @@ contexts:
       scope: constant.language.heredoc.plain.perl
       pop: true
 
-### [ CLASSES ]################################################################
+###[ CLASSES ]################################################################
 
   class:
     - match: '{{module}}(?=\s*(?:::|[#;]|$))'
@@ -604,7 +605,7 @@ contexts:
         2: variable.other.member.perl
     - include: else-pop
 
-### [ CONTROL KEYWORDS ]#######################################################
+###[ CONTROL KEYWORDS ]#######################################################
 
   control:
     - match: \b(?:default|else|elsif|given|if|unless|when){{break}}
@@ -616,7 +617,6 @@ contexts:
     - match: \b(?:do|for|foreach|until|while){{break}}
       scope: keyword.control.flow.perl
       push: regexp-pop
-    - include: label
 
   label:
     - match: ({{identifier}})(:)(?!:)
@@ -625,7 +625,7 @@ contexts:
         2: punctuation.separator.perl
       push: regexp-pop
 
-### [ OPERATORS ]#############################################################
+###[ OPERATORS ]##############################################################
 
   operators:
     # SEE: https://www.tutorialspoint.com/perl/perl_operators.htm
@@ -643,6 +643,9 @@ contexts:
       push: regexp-pop
     - match: '[!~=]~'
       scope: keyword.operator.binary.perl
+      push: regexp-pop
+    - match: <<|>>
+      scope: keyword.operator.bitwise.perl
       push: regexp-pop
     - match: <=>|//|\&\&|\|\||==|!=|>=|<=|[<>:!?]
       scope: keyword.operator.logical.perl
@@ -675,7 +678,7 @@ contexts:
       scope: keyword.operator.logical.perl
       push: regexp-pop
 
-### [ QUOTED LIKE ]###########################################################
+###[ QUOTED LIKE ]############################################################
 
   quoted-like:
     # SEE: http://perldoc.perl.org/perlop.html#Regexp-Quote-Like-Operators
@@ -889,7 +892,7 @@ contexts:
     - match: \\.
       scope: constant.character.escape.perl
 
-### [ REGEXP ] ###############################################################
+###[ REGEXP ]#################################################################
 
   regexp-pop:
     # /<pattern>/<flags>
@@ -901,9 +904,18 @@ contexts:
       escape_captures:
         1: punctuation.section.generic.end.perl
         2: constant.language.flags.regexp.perl
+    # angle quoted strings
+    - match: \<(?=[^<])
+      scope: punctuation.definition.string.begin.perl
+      set:
+        - meta_scope: string.quoted.angle.perl
+        - match: \>
+          scope: punctuation.definition.string.end.perl
+          pop: true
+        - include: character-escape
     - include: else-pop
 
-### [ FUNCTIONS ]#############################################################
+###[ FUNCTIONS ]##############################################################
 
   functions:
     - match: |-
@@ -941,11 +953,11 @@ contexts:
       scope: variable.function.perl
       push: regexp-pop
 
-### [ SUB ]###################################################################
+###[ SUB ]####################################################################
 
   sub:
     - match: \bsub\b
-      scope: keyword.control.sub.perl
+      scope: storage.type.function.perl
       push: sub-name
 
   sub-name:
@@ -995,7 +1007,7 @@ contexts:
       pop: true
     - include: main
 
-### [ VARIABLES ]#############################################################
+###[ VARIABLES ]##############################################################
 
   variables:
     # SEE: http://perldoc.perl.org/perlvar.html

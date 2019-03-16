@@ -4,7 +4,7 @@
 # ^^^^^^^^^^^^^^^^^^^^^^^ comment.line.number-sign.perl
 #         ^ - punctuation
 
-### [ POD TESTS ] ############################################################
+###[ POD TESTS ] #############################################################
 
 =pod
 # <- comment.block.documentation.perl entity.name.tag.pod.perl
@@ -136,7 +136,7 @@
 # <- comment.block.documentation.perl entity.name.tag.pod.perl
 #^^^ comment.block.documentation.perl entity.name.tag.pod.perl
 
-### [ FORMAT ] ###############################################################
+###[ FORMAT ]#################################################################
 
 format name =
 # <- meta.block.format.perl storage.type.format.perl
@@ -166,7 +166,7 @@ format name =
 .
 # <- punctuation.terminator.format.perl
 
-### [ HEREDOC ] ##############################################################
+###[ HEREDOC ]################################################################
 
 $var = << CSS;
 #      ^^^^^^^ meta.heredoc.perl
@@ -368,7 +368,7 @@ EOT
 #    ^^^^^^^^^^ - meta.heredoc.perl
 #    ^^ - keyword.operator.heredoc.perl
 
-### [ OPERATORS ]#############################################################
+###[ OPERATORS ]##############################################################
   ,
 # ^ punctuation.separator.sequence.perl
   ;
@@ -444,7 +444,7 @@ EOT
   ..
 # ^^ keyword.operator.range.perl
 
-### [ VARIABLES ]#############################################################
+###[ VARIABLES ]##############################################################
 
   $&
 # ^^ variable.other.regexp.match.perl
@@ -613,7 +613,7 @@ EOT
 #                       ^ keyword.operator.assignment.perl
 #                         ^^^^^^ string.quoted.single.perl
 #                               ^ punctuation.terminator.statement.perl
-### [ CONSTANTS ] ############################################################
+###[ CONSTANTS ] #############################################################
 
   1234             # decimal integer
 # ^^^^ constant.numeric.integer.perl
@@ -662,7 +662,7 @@ EOT
   ARGV
 # ^^^^ constant.language.filehandle.perl
 
-### [ STRINGS ] ##############################################################
+###[ STRINGS ]################################################################
 
   "quoted \"interpolated\" foo 'bar' baz"
 # ^ punctuation.definition.string.begin.perl
@@ -740,7 +740,7 @@ EOT
 # ^ string
 #  ^ punctuation.section.generic.end.perl - string
 
-### [ REGEX ] ################################################################
+###[ REGEX ]##################################################################
 
   /[a-z]test\d{3}/g;
 # ^ punctuation.section.generic.begin.perl - string.regexp - source.regexp
@@ -924,7 +924,7 @@ EOT
 #        ^ punctuation.section.generic.end.perl
 #         ^ punctuation.terminator.statement.perl
 
-### [ DECLARATIONS ]##########################################################
+###[ DECLARATIONS ]###########################################################
 
 my
 # <- keyword.declaration.variable
@@ -1138,41 +1138,41 @@ no strict;
 #  ^^^^^^ storage.modifier.perl
 #        ^ punctuation.terminator.statement.perl
 
-### [ SUB ]###################################################################
+###[ SUB ]####################################################################
 
 sub
-# <- meta.function.perl keyword.control.sub.perl
-#^^ meta.function.perl keyword.control.sub.perl
+# <- meta.function.perl storage.type.function.perl
+#^^ meta.function.perl storage.type.function.perl
 #  ^ - invalid
 sub name
-# <- meta.function.perl keyword.control.sub.perl
+# <- meta.function.perl storage.type.function.perl
 #^^^^^^^ meta.function.perl
-#^^ keyword.control.sub.perl
+#^^ storage.type.function.perl
 #   ^^^^ entity.name.function.perl
 #       ^ - invalid
 sub name invalid
-# <- meta.function.perl keyword.control.sub.perl
+# <- meta.function.perl storage.type.function.perl
 #^^^^^^^^^^^^^^^ meta.function.perl
-#^^ keyword.control.sub.perl
+#^^ storage.type.function.perl
 #   ^^^^ entity.name.function.perl
 #        ^^^^^^^ invalid.illegal.function-name.perl
 sub name;
-# <- meta.function.perl keyword.control.sub.perl
+# <- meta.function.perl storage.type.function.perl
 #^^^^^^^ meta.function.perl
-#^^ keyword.control.sub.perl
+#^^ storage.type.function.perl
 #   ^^^^ entity.name.function.perl
 #       ^ punctuation.terminator.statement.perl
 sub name invalid;
-# <- meta.function.perl keyword.control.sub.perl
+# <- meta.function.perl storage.type.function.perl
 #^^^^^^^^^^^^^^^ meta.function.perl
-#^^ keyword.control.sub.perl
+#^^ storage.type.function.perl
 #   ^^^^ entity.name.function.perl
 #        ^^^^^^^ invalid.illegal.function-name.perl
 #               ^ punctuation.terminator.statement.perl
 sub {
-# <- meta.function.perl keyword.control.sub.perl
+# <- meta.function.perl storage.type.function.perl
 #^^^^^^^^^^ meta.function.perl
-#^^ keyword.control.sub.perl
+#^^ storage.type.function.perl
 #   ^ punctuation.section.block.begin.perl
   say "Hello";
 # <- meta.function.perl
@@ -1186,9 +1186,9 @@ sub
 }
 # <- meta.function.perl punctuation.section.block.end.perl
 sub name {
-# <- meta.function.perl keyword.control.sub.perl
+# <- meta.function.perl storage.type.function.perl
 #^^^^^^^^^^ meta.function.perl
-#^^ keyword.control.sub.perl
+#^^ storage.type.function.perl
 #   ^^^^ entity.name.function.perl
 #        ^ punctuation.section.block.begin.perl
   say "Hello";
@@ -1204,9 +1204,9 @@ sub name
 }
 # <- meta.function.perl punctuation.section.block.end.perl
 sub name invalid {
-# <- meta.function.perl keyword.control.sub.perl
+# <- meta.function.perl storage.type.function.perl
 #^^^^^^^^^^^^^^^^^ meta.function.perl
-#^^ keyword.control.sub.perl
+#^^ storage.type.function.perl
 #   ^^^^ entity.name.function.perl
 #        ^^^^^^^ invalid.illegal.function-name.perl
 #                ^ punctuation.section.block.begin.perl
@@ -1219,11 +1219,11 @@ sub name invalid
 # <- meta.function.perl punctuation.section.block.end.perl
 
 sub name ($arg, $arg) {
-# <- meta.function.perl keyword.control.sub.perl
+# <- meta.function.perl storage.type.function.perl
 #^^^^^^^^ meta.function.perl - meta.function.parameters.perl
 #        ^^^^^^^^^^^^ meta.function.parameters.perl - meta.function.perl
 #                    ^^ meta.function.perl - meta.function.parameters.perl
-#^^ keyword.control.sub.perl
+#^^ storage.type.function.perl
 #   ^^^^ entity.name.function.perl
 #        ^ punctuation.section.group.begin.perl
 #         ^^^^ variable.parameter.perl
@@ -1240,11 +1240,11 @@ sub name ($arg, $arg)
 # <- meta.function.perl punctuation.section.block.end.perl
 
 sub name invalid ($arg, $arg) {
-# <- meta.function.perl keyword.control.sub.perl
+# <- meta.function.perl storage.type.function.perl
 #^^^^^^^^^^^^^^^^ meta.function.perl - meta.function.parameters.perl
 #                ^^^^^^^^^^^^ meta.function.parameters.perl - meta.function.perl
 #                            ^^ meta.function.perl - meta.function.parameters.perl
-#^^ keyword.control.sub.perl
+#^^ storage.type.function.perl
 #   ^^^^ entity.name.function.perl
 #        ^^^^^^^ invalid.illegal.function-name.perl
 #                ^ punctuation.section.group.begin.perl
@@ -1265,7 +1265,7 @@ $var = sub {
 #^^^ variable.other.readwrite.global.perl
 #    ^ keyword.operator.assignment.perl
 #      ^^^^^^^ meta.function.perl
-#      ^^^ keyword.control.sub.perl
+#      ^^^ storage.type.function.perl
   say "hello";
 # <- meta.function.perl
 # ^^^ meta.function.perl support.function.perl
@@ -1277,7 +1277,7 @@ sub name ($) {}
 #         ^ variable.parameter.perl
 #          ^ punctuation.section.group.end.perl - variable.parameter.perl
 
-### [ EXPRESSIONS ]###########################################################
+###[ EXPRESSIONS ]############################################################
 
   retry:
 # ^^^^^ entity.name.label.perl
@@ -1290,6 +1290,17 @@ sub name ($) {}
 #                 ^ punctuation.terminator.statement.perl
   retry::
 # ^^^^^^^ - entity.name.label.perl
+
+  LINE:
+# ^^^^ entity.name.label.perl
+#     ^ punctuation.separator.perl
+
+  LINE:exit -1
+# ^^^^ entity.name.label.perl
+#     ^ punctuation.separator.perl
+#      ^^^^ keyword.other.flow.perl
+#           ^^ constant.numeric.integer.perl
+
   if(exists($curargs{$index}))
 # ^^ keyword.control.conditional.perl
 #   ^ punctuation.section.group.begin.perl
@@ -1306,3 +1317,21 @@ sub name ($) {}
 # ^^^^^^^^^^^^^^ variable.function.perl
 #                ^^^^ variable.other.readwrite.global.perl
 #                    ^ punctuation.terminator.statement.perl
+
+  foreach my $vsn_mk (<lib/*/vsn.mk>, <erts/vsn.mk>) {
+# ^^^^^^^ keyword.control.flow.perl
+#         ^^ keyword.declaration.variable.perl
+#            ^ punctuation.definition.variable.perl
+#            ^^^^^^^ variable.other.readwrite.global.perl
+#                    ^ punctuation.section.group.begin.perl
+#                     ^ punctuation.definition.string.begin.perl
+#                     ^^^^^^^^^^^^^^ string.quoted.angle.perl
+#                                  ^ punctuation.definition.string.end.perl
+#                                   ^ punctuation.separator.sequence.perl
+#                                     ^ punctuation.definition.string.begin.perl
+#                                     ^^^^^^^^^^^^^ string.quoted.angle.perl
+#                                                 ^ punctuation.definition.string.end.perl
+#                                                  ^ punctuation.section.group.end.perl
+#                                                    ^ punctuation.section.block.begin.perl
+  }
+# ^ punctuation.section.block.end.perl
